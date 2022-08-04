@@ -4,13 +4,8 @@ public class SoundEffects : MonoBehaviour
 {
     [SerializeField] private AudioSource _source;
 
-    public void PlaySound()
+    public void PlaySound(AudioClip clip)
     {
-        if (_source.isPlaying)
-        {
-            _source.Stop();
-        }
-
-        _source.Play();
+        _source.PlayOneShot(clip);
     }
 }
