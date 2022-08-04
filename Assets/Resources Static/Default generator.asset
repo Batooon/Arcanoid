@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6231a2bc517cbfc4c9b747f3cb612dcb, type: 3}
+  m_Name: Default generator
+  m_EditorClassIdentifier: 
+  _blockPrefab: {fileID: 8000315463046717939, guid: 84ec08276ab285f4ba0c4a277e90442f, type: 3}
+  _blockSprites:
+  - {fileID: -7403654755109705478, guid: 8c658fdc4a9dec645ba314085cd69083, type: 3}
+  - {fileID: -1727952987502521281, guid: 8c658fdc4a9dec645ba314085cd69083, type: 3}
+  - {fileID: -5768520636415906085, guid: 8c658fdc4a9dec645ba314085cd69083, type: 3}
+  - {fileID: 3273873245818028246, guid: 8c658fdc4a9dec645ba314085cd69083, type: 3}
+  _startingSpawnPosition: {x: -6.5, y: 0.5}
+  _gridSize: {x: 15, y: 6}
