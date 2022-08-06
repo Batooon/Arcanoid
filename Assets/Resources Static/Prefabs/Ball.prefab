@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a05711545a7e840a838ebdf895ec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minStartingAngle: 208.5
-  _arcAngle: 123.5
+  _minStartingAngle: 45
+  _arcAngle: 90
   _radius: 0.17
   _maxSpeed: 10
   _maxAcceleration: 10
