@@ -75,25 +75,25 @@ public class Borders : MonoBehaviour
 
     public bool TryBounce(out Vector2 normal, Vector2 position, float radius, Vector2 direction)
     {
-        if (position.x + radius >= RightBorderX && FacingBorder(Vector2.left, direction))
+        if (HitRightWall(position, radius) && FacingBorder(Vector2.left, direction))
         {
             normal = Vector2.left;
             return true;
         }
 
-        if (position.x - radius <= LeftBorderX && FacingBorder(Vector2.right, direction))
+        if (HitLeftWall(position, radius) && FacingBorder(Vector2.right, direction))
         {
             normal = Vector2.right;
             return true;
         }
 
-        if (position.y + radius >= TopBorderY && FacingBorder(Vector2.down, direction))
+        if (HitTopWall(position, radius) && FacingBorder(Vector2.down, direction))
         {
             normal = Vector2.down;
             return true;
         }
 
-        if (position.y - radius <= BottomBorderY && FacingBorder(Vector2.up, direction))
+        if (HitBottomWall(position, radius) && FacingBorder(Vector2.up, direction))
         {
             normal = Vector2.up;
             return true;
@@ -101,6 +101,26 @@ public class Borders : MonoBehaviour
 
         normal = default;
         return false;
+    }
+
+    private bool HitRightWall(Vector2 position, float radius)
+    {
+        return position.x + radius >= RightBorderX;
+    }
+
+    private bool HitLeftWall(Vector2 position, float radius)
+    {
+        return position.x - radius <= LeftBorderX;
+    }
+
+    private bool HitTopWall(Vector2 position, float radius)
+    {
+        return position.y + radius >= TopBorderY;
+    }
+
+    private bool HitBottomWall(Vector2 position, float radius)
+    {
+        return position.y - radius <= BottomBorderY;
     }
 
     private bool FacingBorder(Vector2 borderNormal, Vector2 direction)
