@@ -153,7 +153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &197442671
 MonoBehaviour:
@@ -292,7 +292,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429920311
 GameObject:
@@ -322,7 +322,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -439,6 +439,21 @@ MonoBehaviour:
   _blocksParent: {fileID: 288023785}
   _ballPrefab: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
   _ballSpawnPoint: {fileID: 2002413283141769211}
+  _ballHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 197442671}
+        m_TargetAssemblyTypeName: SoundEffects, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 0cf255092a24e0b4ba7672d74328cbd6, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,96 +528,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4807403499196086197, guid: 9bb42191f2f4d904a840abaddadcfdd8, type: 3}
   m_PrefabInstance: {fileID: 2002413283141769210}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4824384534916872240
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4824384533320572311, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_Name
-      value: Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572311, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572312, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 197442671}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlaySound
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SoundEffects, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 8300000, guid: 0cf255092a24e0b4ba7672d74328cbd6, type: 3}
-    - target: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
-      propertyPath: _ballHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.AudioClip, UnityEngine
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
