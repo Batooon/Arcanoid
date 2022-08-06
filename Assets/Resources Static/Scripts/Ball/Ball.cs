@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
 
     private Vector3 _velocity;
 
-    private void Start()
+    public void Activate()
     {
         RandomizeDirection();
     }
