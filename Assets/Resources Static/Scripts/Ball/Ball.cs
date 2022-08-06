@@ -14,14 +14,22 @@ public class Ball : MonoBehaviour
     [SerializeField, Range(0f, 100f)] private float _maxSpeed = 5f;
     [SerializeField, Range(0f, 100f)] private float _maxAcceleration = 10f;
     [SerializeField] private Vector2 _direction;
+    [SerializeField] private float _angleDistribution;
 
     [SerializeField] private UnityEvent _ballHit;
 
+    private bool _canMove;
     private Vector3 _velocity;
 
     public void Activate()
     {
-        RandomizeDirection();
+        RandomizeInitialDirection();
+        _canMove = true;
+    }
+
+    public void AddOnHitSubscribers(UnityEvent onHitEvent)
+    {
+        _ballHit.AddListener(onHitEvent.Invoke);
     }
 
     private void OnValidate()
@@ -31,6 +39,8 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (_canMove == false)
+            return;
         var desiredVelocity = new Vector3(_direction.x, _direction.y) * _maxSpeed;
         var maxSpeedChange = _maxAcceleration * Time.deltaTime;
 
@@ -43,6 +53,8 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_canMove == false)
+            return;
         if (Borders.Instance.TryBounce(out var normal, transform.localPosition, _radius, _direction))
         {
             Bounce(normal);
@@ -62,8 +74,25 @@ public class Ball : MonoBehaviour
     private void Bounce(Vector2 normal)
     {
         _ballHit?.Invoke();
-        _direction = Vector2.Reflect(_direction, normal);
+        // _direction = Vector2.Reflect(_direction, normal);
+        var accurateDirection = Vector2.Reflect(_direction, normal);
+        RandomizeDirection(_angleDistribution, _angleDistribution, accurateDirection);
         _velocity = new Vector3(_direction.x, _direction.y) * _maxSpeed;
+    }
+    
+    private void RandomizeDirection(float minAngle, float maxAngle, Vector3 axis)
+    {
+        //TODO: bounce direction randomization
+        var newDirection =
+            Quaternion.AngleAxis(Random.Range(minAngle, maxAngle), axis) *
+            transform.right;
+        _direction = newDirection;
+    }
+
+    [ContextMenu("Randomize initial direction")]
+    private void RandomizeInitialDirection()
+    {
+        RandomizeDirection(_minStartingAngle, _minStartingAngle + _arcAngle, transform.forward);
     }
     
 #if UNITY_EDITOR
@@ -82,13 +111,4 @@ public class Ball : MonoBehaviour
         Handles.color = Color.white;
     }
 #endif
-
-    [ContextMenu("Randomize direction")]
-    private void RandomizeDirection()
-    {
-        var newDirection =
-            Quaternion.AngleAxis(Random.Range(_minStartingAngle, _minStartingAngle + _arcAngle), transform.forward) *
-            transform.right;
-        _direction = newDirection;
-    }
 }
