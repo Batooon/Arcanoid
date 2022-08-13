@@ -67,15 +67,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a05711545a7e840a838ebdf895ec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minStartingAngle: 45
+  _minStartingAngle: -135
   _arcAngle: 90
   _radius: 0.17
   _maxSpeed: 10
   _maxAcceleration: 10
   _direction: {x: 0.68395793, y: -0.72952145}
+  _angleDistribution: 3.5
   _ballHit:
     m_PersistentCalls:
       m_Calls: []
+  _trail: {fileID: 4824384533320572315}
 --- !u!96 &4824384533320572315
 TrailRenderer:
   serializedVersion: 2
