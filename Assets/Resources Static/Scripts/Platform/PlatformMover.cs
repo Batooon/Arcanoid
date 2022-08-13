@@ -7,10 +7,11 @@ namespace Platform
         private const int LeftMouseButton = 0;
 
         [SerializeField] private SpriteRenderer _graphic;
-        [SerializeField] private bool _useGyro;
 
         public float RightCheck => _rightCheck.position.x;
         public float LeftCheck => _leftCheck.position.x;
+        
+        public Vector3 MoveDelta { get; private set; }
 
         private Transform _transform;
 
@@ -77,23 +78,24 @@ namespace Platform
             var projectedPointer = Utils.Instance.MainCamera.ScreenToWorldPoint(position);
             _newMousePositionX = projectedPointer.x;
             var deltaX = _newMousePositionX - _oldMousePositionX;
-            var delta = Vector3.right * deltaX;
+            MoveDelta = Vector3.right * deltaX;
+            // var delta = Vector3.right * deltaX;
             if (Borders.Instance.CanPlatformMove(RightCheck + deltaX, LeftCheck + deltaX))
             {
-                _transform.localPosition += delta;
+                _transform.localPosition += MoveDelta;
             }
             else
             {
                 if (deltaX > 0)
                 {
-                    delta = Vector3.right * (Borders.Instance.RightBorderX - RightCheck);
+                    MoveDelta = Vector3.right * (Borders.Instance.RightBorderX - RightCheck);
                 }
                 else
                 {
-                    delta = Vector3.right * (Borders.Instance.LeftBorderX - LeftCheck);
+                    MoveDelta = Vector3.right * (Borders.Instance.LeftBorderX - LeftCheck);
                 }
 
-                _transform.localPosition += delta;
+                _transform.localPosition += MoveDelta;
             }
 
             _oldMousePositionX = _newMousePositionX;
