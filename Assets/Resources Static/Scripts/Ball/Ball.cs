@@ -9,22 +9,21 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private float _minStartingAngle;
     [SerializeField] private float _arcAngle;
-
     [SerializeField] private float _radius;
     [SerializeField, Range(0f, 100f)] private float _maxSpeed = 5f;
     [SerializeField, Range(0f, 100f)] private float _maxAcceleration = 10f;
     [SerializeField] private Vector2 _direction;
     [SerializeField] private float _angleDistribution;
-
     [SerializeField] private UnityEvent _ballHit;
+    [SerializeField] private TrailRenderer _trail;
 
+    public bool Activated { get; private set; }
     private bool _canMove;
     private Vector3 _velocity;
 
-    public void Activate()
+    private void Start()
     {
-        RandomizeInitialDirection();
-        _canMove = true;
+        _trail.enabled = false;
     }
 
     public void AddOnHitSubscribers(UnityEvent onHitEvent)
@@ -73,26 +72,33 @@ public class Ball : MonoBehaviour
 
     private void Bounce(Vector2 normal)
     {
-        _ballHit?.Invoke();
-        // _direction = Vector2.Reflect(_direction, normal);
         var accurateDirection = Vector2.Reflect(_direction, normal);
-        RandomizeDirection(_angleDistribution, _angleDistribution, accurateDirection);
+        var randomizedDirection = RandomizeDirection(-_angleDistribution, _angleDistribution, accurateDirection);
+        _direction = randomizedDirection.normalized;
         _velocity = new Vector3(_direction.x, _direction.y) * _maxSpeed;
+        
+        _ballHit?.Invoke();
     }
     
-    private void RandomizeDirection(float minAngle, float maxAngle, Vector3 axis)
+    private Vector2 RandomizeDirection(float minAngle, float maxAngle, Vector3 axis)
     {
-        //TODO: bounce direction randomization
-        var newDirection =
-            Quaternion.AngleAxis(Random.Range(minAngle, maxAngle), axis) *
-            transform.right;
-        _direction = newDirection;
+        var randomizedRotation = Quaternion.AngleAxis(Random.Range(minAngle, maxAngle), transform.forward);
+        var newDirection = randomizedRotation * axis;
+        return newDirection;
+    }
+    
+    public void Activate()
+    {
+        RandomizeInitialDirection();
+        _canMove = true;
+        Activated = true;
+        _trail.enabled = true;
     }
 
     [ContextMenu("Randomize initial direction")]
     private void RandomizeInitialDirection()
     {
-        RandomizeDirection(_minStartingAngle, _minStartingAngle + _arcAngle, transform.forward);
+        RandomizeDirection(_minStartingAngle, _minStartingAngle + _arcAngle, transform.right);
     }
     
 #if UNITY_EDITOR
