@@ -264,6 +264,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &287126339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2002413284397898671, guid: 9bb42191f2f4d904a840abaddadcfdd8, type: 3}
+  m_PrefabInstance: {fileID: 2002413283141769210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c854107f48e6f2a4dbcf580bca77985a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &288023782
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +450,7 @@ MonoBehaviour:
   _blocksParent: {fileID: 288023785}
   _ballPrefab: {fileID: 4824384533320572314, guid: 424bfa4225f58c24e997cce9f4813a5a, type: 3}
   _ballSpawnPoint: {fileID: 2002413283141769211}
+  _platformMover: {fileID: 287126339}
   _ballHit:
     m_PersistentCalls:
       m_Calls:
