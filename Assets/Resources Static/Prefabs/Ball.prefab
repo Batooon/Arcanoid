@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4824384533320572313}
   - component: {fileID: 4824384533320572314}
   - component: {fileID: 4824384533320572315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &4824384533320572314
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 4824384534466955090}
   - component: {fileID: 4824384534466955089}
   - component: {fileID: 4824384534466955091}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

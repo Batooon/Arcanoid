@@ -37,7 +37,7 @@ public class ObjectPool<T> where T : MonoBehaviour
 
     public T GetAvailableObject()
     {
-        foreach (var obj in GetActiveObjects())
+        foreach (var obj in GetSleepObjects())
         {
             return obj;
         }
@@ -50,5 +50,10 @@ public class ObjectPool<T> where T : MonoBehaviour
     public IEnumerable<T> GetActiveObjects()
     {
         return _pooledObjects.Where(obj => obj.gameObject.activeInHierarchy);
+    }
+
+    public IEnumerable<T> GetSleepObjects()
+    {
+        return _pooledObjects.Where(obj => obj.gameObject.activeInHierarchy == false);
     }
 }

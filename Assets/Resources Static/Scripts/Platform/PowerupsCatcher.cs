@@ -17,24 +17,4 @@ namespace Platform
     {
         void Activate();
     }
-
-    public class BallsMultiplier : MonoBehaviour, IPowerup
-    {
-        [SerializeField] private int _multiplier;
-        private ObjectPool<Ball> _ballsPool;
-        
-        public void Initialize(ObjectPool<Ball> ballsPool)
-        {
-            _ballsPool = ballsPool;
-        }
-        
-        public void Activate()
-        {
-            var activeBalls = _ballsPool.GetActiveObjects();
-            foreach(Ball ball in activeBalls)
-            {
-                //TODO: ask balls factory to spawn x_multiplier balls amount
-            }
-        }
-    }
 }

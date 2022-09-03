@@ -4,26 +4,32 @@ using UnityEngine.Events;
 
 public class Entry : MonoBehaviour
 {
+    [SerializeField] private BallsFactory _ballsFactory;
     [SerializeField] private BlocksGenerator _blocksGenerator;
     [SerializeField] private Transform _blocksParent;
-    [SerializeField] private Ball _ballPrefab;
+    // [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _ballSpawnPoint;
     [SerializeField] private PlatformMover _platformMover;
     [SerializeField] private UnityEvent _ballHit;
 
     private Ball _spawnedMainBall;
 
-    private ObjectPool<Ball> _ballPool;
-
     private void Start()
     {
         _blocksGenerator.SpawnBlocks(_blocksParent);
-        _ballPool = new ObjectPool<Ball>(_ballPrefab);
-        var spawnedBall = _ballPool.GetAvailableObject();
+        _ballsFactory.Initialize();
+        InitializeStartingBall();
+    }
+
+    private void InitializeStartingBall()
+    {
+        var spawnedBall = _ballsFactory.GetAvailableObject();
         spawnedBall.transform.position = _ballSpawnPoint.position;
         spawnedBall.AddOnHitSubscribers(_ballHit);
+        spawnedBall.SetTrailActive(false);
         spawnedBall.gameObject.SetActive(true);
         _spawnedMainBall = spawnedBall;
+        _spawnedMainBall.RandomizeInitialDirection();
     }
 
     private void Update()

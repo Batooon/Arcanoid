@@ -21,19 +21,30 @@ public class Ball : MonoBehaviour
     private bool _canMove;
     private Vector3 _velocity;
 
-    private void Start()
+    public void SetTrailActive(bool isActive)
     {
-        _trail.enabled = false;
+        _trail.enabled = isActive;
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        _direction = direction.normalized;
+    }
+
+    public Vector2 GetDirection()
+    {
+        return _direction;
     }
 
     public void AddOnHitSubscribers(UnityEvent onHitEvent)
     {
-        _ballHit.AddListener(onHitEvent.Invoke);
+        if (onHitEvent != null)
+            _ballHit.AddListener(onHitEvent.Invoke);
     }
 
     private void OnValidate()
     {
-        _direction = _direction.normalized;
+        SetDirection(_direction);
     }
 
     private void Update()
@@ -74,12 +85,12 @@ public class Ball : MonoBehaviour
     {
         var accurateDirection = Vector2.Reflect(_direction, normal);
         var randomizedDirection = RandomizeDirection(-_angleDistribution, _angleDistribution, accurateDirection);
-        _direction = randomizedDirection.normalized;
+        SetDirection(randomizedDirection);
         _velocity = new Vector3(_direction.x, _direction.y) * _maxSpeed;
         
         _ballHit?.Invoke();
     }
-    
+
     private Vector2 RandomizeDirection(float minAngle, float maxAngle, Vector3 axis)
     {
         var randomizedRotation = Quaternion.AngleAxis(Random.Range(minAngle, maxAngle), transform.forward);
@@ -89,16 +100,16 @@ public class Ball : MonoBehaviour
     
     public void Activate()
     {
-        RandomizeInitialDirection();
         _canMove = true;
         Activated = true;
-        _trail.enabled = true;
+        SetTrailActive(true);
     }
 
     [ContextMenu("Randomize initial direction")]
-    private void RandomizeInitialDirection()
+    public void RandomizeInitialDirection()
     {
-        RandomizeDirection(_minStartingAngle, _minStartingAngle + _arcAngle, transform.right);
+        var randomizedDirection = RandomizeDirection(_minStartingAngle, _minStartingAngle + _arcAngle, transform.right);
+        SetDirection(randomizedDirection);
     }
     
 #if UNITY_EDITOR
