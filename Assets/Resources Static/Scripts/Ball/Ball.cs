@@ -1,28 +1,9 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using Platform;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
-
-public class PowerupsSpawner : MonoBehaviour
-{
-    [SerializeField] private Powerup[] _powerups;
-
-    public void TrySpawn(Vector2 position)
-    {
-        for (var i = 0; i < _powerups.Length; i++)
-        {
-            var powerup = _powerups[i];
-            if (Random.value <= powerup.GetSpawnChance())
-            {
-                //TODO: spawn powerup
-                return;
-            }
-        }
-    }
-}
 
 public class Ball : MonoBehaviour
 {
@@ -105,6 +86,7 @@ public class Ball : MonoBehaviour
         }
         var normal = col.contacts[0].normal;
         Bounce(normal);
+        _ballHit?.Invoke();
     }
 
     private void Bounce(Vector2 normal)
@@ -113,8 +95,6 @@ public class Ball : MonoBehaviour
         var randomizedDirection = RandomizeDirection(-_angleDistribution, _angleDistribution, accurateDirection);
         SetDirection(randomizedDirection);
         _velocity = new Vector3(_direction.x, _direction.y) * _maxSpeed;
-        
-        _ballHit?.Invoke();
     }
 
     private Vector2 RandomizeDirection(float minAngle, float maxAngle, Vector3 axis)
