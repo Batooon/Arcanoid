@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 namespace Platform
 {
-    public class BallsMultiplier : MonoBehaviour, IPowerup
+    public class BallsMultiplier : Powerup
     {
         private const float Tau = 6.28318530718f;
         
@@ -17,7 +16,7 @@ namespace Platform
             _angleStep = Tau / _multiplier;
         }
 
-        public void Activate()
+        public override void Activate()
         {
             var balls = _ballsFactory.GetAllActiveBalls();
             foreach(Ball ball in balls)

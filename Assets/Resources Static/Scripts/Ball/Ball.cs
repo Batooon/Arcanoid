@@ -1,9 +1,29 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using System;
+using Platform;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+
+public class PowerupsSpawner : MonoBehaviour
+{
+    [SerializeField] private Powerup[] _powerups;
+
+    public void TrySpawn(Vector2 position)
+    {
+        for (var i = 0; i < _powerups.Length; i++)
+        {
+            var powerup = _powerups[i];
+            if (Random.value <= powerup.GetSpawnChance())
+            {
+                //TODO: spawn powerup
+                return;
+            }
+        }
+    }
+}
 
 public class Ball : MonoBehaviour
 {
@@ -20,6 +40,13 @@ public class Ball : MonoBehaviour
     public bool Activated { get; private set; }
     private bool _canMove;
     private Vector3 _velocity;
+
+    private Transform _transform;
+
+    private void Start()
+    {
+        _transform = transform;
+    }
 
     public void SetTrailActive(bool isActive)
     {
@@ -58,14 +85,14 @@ public class Ball : MonoBehaviour
         _velocity.y = Mathf.MoveTowards(_velocity.y, desiredVelocity.y, maxSpeedChange);
 
         // _velocity = Vector3.MoveTowards(_velocity, desiredVelocity, maxSpeedChange);
-        transform.localPosition += _velocity * Time.deltaTime;
+        _transform.localPosition += _velocity * Time.deltaTime;
     }
 
     private void FixedUpdate()
     {
         if (_canMove == false)
             return;
-        if (Borders.Instance.TryBounce(out var normal, transform.localPosition, _radius, _direction))
+        if (Borders.Instance.TryBounce(out var normal, _transform.localPosition, _radius, _direction))
         {
             Bounce(normal);
         }
