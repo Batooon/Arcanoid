@@ -11,8 +11,9 @@ namespace Platform
 
         private float _angleStep;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             _angleStep = Tau / _multiplier;
         }
 
@@ -29,6 +30,7 @@ namespace Platform
                     _ballsFactory.SpawnBall(ball.transform.position, newBallDirection);
                 }
             }
+            base.Activate();
         }
     }
 }
