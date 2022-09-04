@@ -7,16 +7,16 @@ public class Entry : MonoBehaviour
     [SerializeField] private BallsFactory _ballsFactory;
     [SerializeField] private BlocksGenerator _blocksGenerator;
     [SerializeField] private Transform _blocksParent;
-    // [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _ballSpawnPoint;
     [SerializeField] private PlatformMover _platformMover;
+    [SerializeField] private PowerupsSpawner _powerupsSpawner;
     [SerializeField] private UnityEvent _ballHit;
 
     private Ball _spawnedMainBall;
 
     private void Start()
     {
-        _blocksGenerator.SpawnBlocks(_blocksParent);
+        _blocksGenerator.SpawnBlocks(_powerupsSpawner, _blocksParent);
         _ballsFactory.Initialize();
         InitializeStartingBall();
     }
