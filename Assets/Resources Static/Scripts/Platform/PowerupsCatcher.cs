@@ -11,13 +11,5 @@ namespace Platform
                 powerup.Activate();
             }
         }
-
-        // private void OnTriggerEnter2D(Collision2D col)
-        // {
-        //     if (col.transform.TryGetComponent(out Powerup powerup))
-        //     {
-        //         powerup.Activate();
-        //     }
-        // }
     }
 }
