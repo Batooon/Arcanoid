@@ -17,7 +17,7 @@ public class Entry : MonoBehaviour
     private void Start()
     {
         _blocksGenerator.SpawnBlocks(_powerupsSpawner, _blocksParent);
-        _ballsFactory.Initialize();
+        _ballsFactory.Initialize(_ballHit);
         InitializeStartingBall();
     }
 
