@@ -1,7 +1,6 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using System;
 using Platform;
 using UnityEngine;
 using UnityEngine.Events;
