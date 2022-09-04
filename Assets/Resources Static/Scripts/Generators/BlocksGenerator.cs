@@ -9,7 +9,7 @@ public class BlocksGenerator : ScriptableObject
     [SerializeField] private Vector2Int _gridSize;
     [SerializeField] private float _offset;
 
-    public Block[,] SpawnBlocks(Transform parent = null)
+    public Block[,] SpawnBlocks(PowerupsSpawner spawner, Transform parent = null)
     {
         var blocks = new Block[_gridSize.x, _gridSize.y];
         var position = _startingSpawnPosition;
@@ -18,7 +18,7 @@ public class BlocksGenerator : ScriptableObject
         {
             for (var j = 0; j < _gridSize.y; j++)
             {
-                blocks[i, j] = GetNewBlock(position, parent);
+                blocks[i, j] = GetNewBlock(position, parent, spawner);
                 delta = blocks[i, j].GetSize();
                 position.y += delta.y;
                 position.y += _offset;
@@ -32,11 +32,12 @@ public class BlocksGenerator : ScriptableObject
         return blocks;
     }
 
-    public Block GetNewBlock(Vector2 position, Transform parent)
+    public Block GetNewBlock(Vector2 position, Transform parent, PowerupsSpawner spawner)
     {
         var newBlock = Instantiate(_blockPrefab, position, _blockPrefab.transform.rotation, parent);
         var newSpriteIndex = Random.Range(0, _blockSprites.Length);
         newBlock.SetSprite(_blockSprites[newSpriteIndex]);
+        newBlock.Init(spawner);
         return newBlock;
     }
 }
