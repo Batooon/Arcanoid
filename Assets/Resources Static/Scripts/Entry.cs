@@ -45,17 +45,16 @@ public class Entry : MonoBehaviour
             ActivateBall();
         }
 #else
-        if (Input.touchCount > 0)
+        if (Input.touchCount <= 0)
+            return;
+        var touch = Input.touches[0];
+        if (touch.phase == TouchPhase.Ended)
         {
-            var touch = Input.touches[0];
-            if (touch.phase == TouchPhase.Ended)
-            {
-                ActivateBall();
-            }
-            else if(touch.phase == TouchPhase.Moved)
-            {
-                _spawnedMainBall.transform.position += _platformMover.MoveDelta;
-            }
+            ActivateBall();
+        }
+        else if(_spawnedMainBall.Activated == false && touch.phase == TouchPhase.Moved)
+        {
+            _spawnedMainBall.transform.position += _platformMover.MoveDelta;
         }
 #endif
     }
