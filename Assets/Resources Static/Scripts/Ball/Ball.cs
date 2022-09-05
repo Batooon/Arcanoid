@@ -72,6 +72,16 @@ public class Ball : MonoBehaviour
     {
         if (_canMove == false)
             return;
+
+        if (Borders.Instance.HitBottomWall(_transform.localPosition, _radius))
+        {
+            _canMove = false;
+            SetTrailActive(false);
+            _ballHit.RemoveAllListeners();
+            Activated = false;
+            gameObject.SetActive(false);
+        }
+        
         if (Borders.Instance.TryBounce(out var normal, _transform.localPosition, _radius, _direction))
         {
             Bounce(normal);

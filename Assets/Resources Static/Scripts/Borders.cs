@@ -21,10 +21,10 @@ public class Borders : MonoBehaviour
 
     private void Start()
     {
-        var topRightAngle = Utils.Instance.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
-        var bottomLeftAngle = Utils.Instance.MainCamera.ScreenToWorldPoint(Vector3.zero);
+        var topRightCorner = Utils.Instance.MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+        var bottomLeftCorner = Utils.Instance.MainCamera.ScreenToWorldPoint(Vector3.zero);
         
-        RightBorderX = topRightAngle.x;
+        RightBorderX = topRightCorner.x;
 #if UNITY_EDITOR
         var right = new GameObject("right")
         {
@@ -34,7 +34,7 @@ public class Borders : MonoBehaviour
             }
         };
 #endif
-        TopBorderY = topRightAngle.y;
+        TopBorderY = topRightCorner.y;
 #if UNITY_EDITOR
         var top = new GameObject("top")
         {
@@ -44,7 +44,7 @@ public class Borders : MonoBehaviour
             }
         };
 #endif
-        LeftBorderX = bottomLeftAngle.x;
+        LeftBorderX = bottomLeftCorner.x;
 #if UNITY_EDITOR
         var left = new GameObject("left")
         {
@@ -54,7 +54,7 @@ public class Borders : MonoBehaviour
             }
         };
 #endif
-        BottomBorderY = bottomLeftAngle.y;
+        BottomBorderY = bottomLeftCorner.y;
 #if UNITY_EDITOR
         var bottom = new GameObject("bottom")
         {
@@ -93,14 +93,13 @@ public class Borders : MonoBehaviour
             return true;
         }
 
-        if (HitBottomWall(position, radius) && FacingBorder(Vector2.up, direction))
-        {
-            normal = Vector2.up;
-            return true;
-        }
-
         normal = default;
         return false;
+    }
+
+    public bool HitBottomWall(Vector2 position, float radius)
+    {
+        return position.y - radius <= BottomBorderY;
     }
 
     private bool HitRightWall(Vector2 position, float radius)
@@ -116,11 +115,6 @@ public class Borders : MonoBehaviour
     private bool HitTopWall(Vector2 position, float radius)
     {
         return position.y + radius >= TopBorderY;
-    }
-
-    private bool HitBottomWall(Vector2 position, float radius)
-    {
-        return position.y - radius <= BottomBorderY;
     }
 
     private bool FacingBorder(Vector2 borderNormal, Vector2 direction)
